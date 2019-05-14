@@ -11,7 +11,30 @@ class ShoppingList {
     this.shoppingListItems = [];
   }
 
-  addItemsWithSpaces(string) {}
+  addItemsWithSpaces(string) {
+    // split on "\n"
+    let lines = string.split("\n");
+
+    // for each line, separate items based on spaces and create a new item for each
+    // push new reconstructed item to the array
+    for (let i = 0; i < lines.length; i++) {
+      let singleLine = lines[i];
+      let words = singleLine.split(" ");
+      let item = new ShoppingListItem(
+        parseInt(words[0]),
+        words.splice(1, words.length - 2).join(""),
+        parseFloat(words[words.length - 1]).toFixed(2)
+      );
+      this.shoppingListItems.push(item);
+    }
+    return this.shoppingListItems;
+  }
+
+  calculateTaxes() {}
+
+  calculateTotal() {}
+
+  printReceipt() {}
 }
 
 module.exports = ShoppingList;
