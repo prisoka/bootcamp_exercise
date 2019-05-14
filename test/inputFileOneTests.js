@@ -23,7 +23,7 @@ describe("Shopping list with spaces case", () => {
     expect(shoppingList.addItemsWithSpaces).to.be.a("function");
   });
 
-  it("#addItemsWithSpaces should return an array of objects", () => {
+  it("#addItemsWithSpaces should return an array of object", () => {
     expect(shoppingList.addItemsWithSpaces("1 apple 1.50")).to.deep.equal([
       { quantity: 1, itemName: "apple", price: "1.50" }
     ]);
@@ -35,6 +35,18 @@ describe("Shopping list with spaces case", () => {
     ).to.deep.equal([
       { quantity: 1, itemName: "apple", price: "1.50" },
       { quantity: 1, itemName: "book", price: "9.70" }
+    ]);
+  });
+
+  it("#addItemsWithSpaces should return an array of objects", () => {
+    expect(
+      shoppingList.addItemsWithSpaces(
+        "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
+      )
+    ).to.deep.equal([
+      { quantity: 1, itemName: "book", price: "12.49" },
+      { quantity: 1, itemName: "music CD", price: "14.99" },
+      { quantity: 1, itemName: "chocolate bar", price: "0.85" }
     ]);
   });
 
