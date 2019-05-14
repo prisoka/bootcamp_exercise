@@ -1,20 +1,55 @@
 "use strict";
 
 const expect = require("chai").expect;
-const ShoppingListSpaceCase = require("../src/inputFileOne");
+const ShoppingList = require("../src/inputFileOne");
 
 describe("Shopping list with spaces case", () => {
-  let shoppingListSpaceCase;
+  let shoppingList;
 
   beforeEach(() => {
-    shoppingListSpaceCase = new ShoppingListSpaceCase();
+    shoppingList = new ShoppingList();
   });
 
   afterEach(() => {
-    shoppingListSpaceCase = undefined;
+    shoppingList = undefined;
   });
 
-  it("ShoppingListSpaceCase should be an object", () => {
-    expect(shoppingListSpaceCase).to.be.a("object");
+  it("ShoppingList should be an object", () => {
+    expect(shoppingList).to.be.a("object");
+  });
+
+  // #addItemsWithSpaces
+  it("#addItemsWithSpaces should be a function", () => {
+    expect(shoppingList.addItemsWithSpaces).to.be.a("function");
+  });
+
+  it("#addItemsWithSpaces should return an array of objects", () => {
+    expect(shoppingList.addItemsWithSpaces("1 apple 1.50")).to.deep.equal([
+      { quantity: 1, itemName: "apple", price: "1.50" }
+    ]);
+  });
+
+  it("#addItemsWithSpaces should return an array of objects", () => {
+    expect(
+      shoppingList.addItemsWithSpaces("1 apple 1.50\n1 book 9.70")
+    ).to.deep.equal([
+      { quantity: 1, itemName: "apple", price: "1.50" },
+      { quantity: 1, itemName: "book", price: "9.70" }
+    ]);
+  });
+
+  // #calculateTaxes
+  it("#calculateTaxes should be a function", () => {
+    expect(shoppingList.calculateTaxes).to.be.a("function");
+  });
+
+  // #calculateTotal
+  it("#calculateTotal should be a function", () => {
+    expect(shoppingList.calculateTotal).to.be.a("function");
+  });
+
+  // #printReceipt
+  it("#printReceipt should be a function", () => {
+    expect(shoppingList.printReceipt).to.be.a("function");
   });
 });
