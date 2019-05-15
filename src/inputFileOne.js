@@ -38,8 +38,6 @@ class ShoppingList {
     // 10% on all goods
     // 15% on imported goods
 
-    let subTotalArray = [];
-    let subTotal = 0;
     let taxArray = [];
     let totalTax = 0;
 
@@ -51,28 +49,15 @@ class ShoppingList {
       let itemQuantity = item.quantity;
       let itemPrice = parseFloat(item.price);
       let itemTotalCostBeforeTax = itemQuantity * itemPrice;
-      subTotalArray.push(itemTotalCostBeforeTax);
 
       if (
         !exemptItems.includes(item.itemName) &&
         item.itemName !== "imported"
       ) {
-        let tax = parseFloat(itemQuantity * itemPrice * 0.1).toFixed(2);
+        let tax = parseFloat(itemTotalCostBeforeTax * 0.1).toFixed(2);
         taxArray.push(parseFloat(tax));
       }
     }
-
-    console.log("subTotalArray >> ", subTotalArray[0]);
-    console.log("taxArray >>", taxArray);
-
-    if (subTotalArray.length) {
-      subTotal = subTotalArray
-        .reduce((a, b) => {
-          return a + b;
-        })
-        .toFixed(2);
-    }
-    console.log("1. subTotal : ", subTotal);
 
     if (taxArray.length) {
       totalTax = taxArray
@@ -81,16 +66,37 @@ class ShoppingList {
         })
         .toFixed(2);
     }
-    console.log("2. totalTax : ", totalTax);
+    // console.log("totalTax : ", totalTax);
 
     // calculate total
-    let total = (parseFloat(subTotal) + parseFloat(totalTax)).toFixed(2);
-    console.log("3. T O T A L", total);
+    // let total = (parseFloat(subTotal) + parseFloat(totalTax)).toFixed(2);
+    // console.log("3. T O T A L", total);
 
     return parseFloat(totalTax);
   }
 
-  calculateSubTotal() {}
+  calculateSubTotal(string) {
+    let shoppingListItems = this.addItemsWithSpaces(string);
+    let subTotalArray = [];
+    let subTotal = 0;
+
+    for (let i = 0; i < shoppingListItems.length; i++) {
+      let item = shoppingListItems[i];
+      let itemQuantity = item.quantity;
+      let itemPrice = parseFloat(item.price);
+      let itemTotalCostBeforeTax = itemQuantity * itemPrice;
+      subTotalArray.push(itemTotalCostBeforeTax);
+    }
+
+    if (subTotalArray.length) {
+      subTotal = subTotalArray
+        .reduce((a, b) => {
+          return a + b;
+        })
+        .toFixed(2);
+    }
+    return subTotal;
+  }
 
   printReceipt() {}
 }
