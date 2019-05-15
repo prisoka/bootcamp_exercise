@@ -95,7 +95,7 @@ class ShoppingList {
         })
         .toFixed(2);
     }
-    return subTotal;
+    return parseFloat(subTotal);
   }
 
   printReceipt() {}
