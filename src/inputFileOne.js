@@ -22,7 +22,7 @@ class ShoppingList {
       let words = singleLine.split(" ");
       let item = new ShoppingListItem(
         parseInt(words[0]),
-        words.splice(1, words.length - 2).join(""),
+        words.splice(1, words.length - 2).join(" "),
         parseFloat(words[words.length - 1]).toFixed(2)
       );
       this.shoppingListItems.push(item);
@@ -30,7 +30,15 @@ class ShoppingList {
     return this.shoppingListItems;
   }
 
-  calculateTaxes() {}
+  calculateTaxes() {
+    // exempt: books, food, and medical products
+    // 10% on all goods
+    // 15% on imported goods
+    // round tax w/ 2 decimals: toFixed(1), then parseFloat(string).toFixed(2)
+    // calculate sub-total: for each item on the shopping list, multiply quantity by price
+    // calculate tax on total cost of each item
+    // calculate total
+  }
 
   calculateTotal() {}
 
@@ -53,3 +61,6 @@ module.exports = ShoppingList;
 
 // Sales Taxes: 1.50
 // Total: 29.83
+
+//Edge case:
+// items without quantity, name or price?
