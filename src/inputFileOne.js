@@ -65,11 +65,7 @@ class ShoppingList {
         })
         .toFixed(2);
     }
-    // console.log("totalTax : ", totalTax);
 
-    // calculate total
-    // let total = (parseFloat(subTotal) + parseFloat(totalTax)).toFixed(2);
-    // console.log("3. T O T A L", total);
     return parseFloat(totalTax);
   }
 
@@ -98,22 +94,29 @@ class ShoppingList {
   printReceipt() {
     let products = [];
     let singleProduct = "";
-
     let salesTax = this.calculateTaxes();
-    console.log(salesTax);
-
     let subTotal = this.calculateSubTotal();
-    console.log(subTotal);
-
-    let total = 0.0;
+    let total = subTotal + salesTax;
 
     for (let i = 0; i < this.shoppingListItems.length; i++) {
       let quantity = this.shoppingListItems[i].quantity;
       let itemName = this.shoppingListItems[i].itemName;
       let price = this.shoppingListItems[i].price;
-      singleProduct = quantity + " " + itemName + ": " + price;
+      let totalPrice = (quantity * price).toFixed(2);
+      singleProduct = quantity + " " + itemName + ": " + totalPrice;
       products.push(singleProduct);
     }
+
+    let joinedProducts = products.join("\n");
+    let receipt =
+      joinedProducts +
+      "\n\n" +
+      "Sales Taxes: " +
+      salesTax.toFixed(2) +
+      "\n" +
+      "Total: " +
+      total.toFixed(2);
+    return receipt;
   }
 }
 

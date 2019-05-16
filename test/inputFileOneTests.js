@@ -76,10 +76,10 @@ describe("Testing #calculateTaxes functionality", () => {
 
   it("#calculateTaxes should output the total sales tax, with 2 exempt items", () => {
     shoppingList.addItemsWithSpaces(
-      "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
+      "1 book 12.49\n2 music CD 14.99\n1 chocolate bar 0.85"
     );
 
-    expect(shoppingList.calculateTaxes()).to.equal(1.5);
+    expect(shoppingList.calculateTaxes()).to.equal(3.0);
   });
 
   it("#calculateTaxes should output the total sales tax, with 3 exempt items", () => {
@@ -132,6 +132,8 @@ describe("Testing #calculateSubTotal functionality", () => {
 });
 
 describe("Testing #printReceipt functionality", () => {
+  let shoppingList;
+
   beforeEach(() => {
     shoppingList = new ShoppingList();
   });
@@ -145,35 +147,32 @@ describe("Testing #printReceipt functionality", () => {
   });
 
   it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #1", () => {
-    expect(() => {
-      shoppingList.addItemsWithSpaces(
-        "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
-      );
-      shoppingList.printReceipt();
-    }).to.deep.equal(
+    shoppingList.addItemsWithSpaces(
+      "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
+    );
+
+    expect(shoppingList.printReceipt()).to.deep.equal(
       "1 book: 12.49\n1 music CD: 14.99\n1 chocolate bar: 0.85\n\nSales Taxes: 1.50\nTotal: 29.83"
     );
   });
 
   it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #2", () => {
-    expect(() => {
-      shoppingList.addItemsWithSpaces(
-        "1 bottle 12.49\n1 music CD 16.49\n1 chocolate bar 1.85"
-      );
-      shoppingList.printReceipt();
-    }).to.deep.equal(
-      "1 bottle: 12.49\n1 music CD: 16.49\n1 chocolate bar: 1.85\n\nSales Taxes: 2.09\nTotal: 33.73"
+    shoppingList.addItemsWithSpaces(
+      "1 bottle 12.49\n1 music CD 16.49\n1 chocolate bar 1.85"
+    );
+
+    expect(shoppingList.printReceipt()).to.deep.equal(
+      "1 bottle: 12.49\n1 music CD: 16.49\n1 chocolate bar: 1.85\n\nSales Taxes: 2.90\nTotal: 33.73"
     );
   });
 
   it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #3", () => {
-    expect(() => {
-      shoppingList.addItemsWithSpaces(
-        "1 book 15.00\n2 chocolate bar 3.50\n1 banana 1.00"
-      );
-      shoppingList.printReceipt();
-    }).to.deep.equal(
-      "1 book: 15.00\n2 chocolate bar: 7.00\n1 banana: 1.00\n\nSales Taxes: 0\nTotal: 23.00"
+    shoppingList.addItemsWithSpaces(
+      "1 book 15.10\n2 chocolate bar 3.50\n1 banana 1.00"
+    );
+
+    expect(shoppingList.printReceipt()).to.deep.equal(
+      "1 book: 15.10\n2 chocolate bar: 7.00\n1 banana: 1.00\n\nSales Taxes: 0.00\nTotal: 23.10"
     );
   });
 });
