@@ -66,28 +66,28 @@ describe("Testing #calculateTaxes functionality", () => {
     expect(shoppingList.calculateTaxes).to.be.a("function");
   });
 
-  it("#calculateTaxes should output the total sales tax, with 2 exempt items, #1", () => {
+  it("#calculateTaxes should output the total sales tax, with 1 exempt items", () => {
+    shoppingList.addItemsWithSpaces(
+      "1 bottle 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
+    );
+
+    expect(shoppingList.calculateTaxes()).to.equal(2.75);
+  });
+
+  it("#calculateTaxes should output the total sales tax, with 2 exempt items", () => {
     shoppingList.addItemsWithSpaces(
       "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
     );
-    let output = shoppingList.calculateTaxes();
-    expect(output).to.equal(1.5);
-  });
 
-  it("#calculateTaxes should output the total sales tax, with 2 exempt items, #2", () => {
-    expect(
-      shoppingList.calculateTaxes(
-        "1 bottle 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
-      )
-    ).to.equal(2.75);
+    expect(shoppingList.calculateTaxes()).to.equal(1.5);
   });
 
   it("#calculateTaxes should output the total sales tax, with 3 exempt items", () => {
-    expect(
-      shoppingList.calculateTaxes(
-        "1 book 12.49\n1 chocolate bar 0.85\n1 banana 0.79"
-      )
-    ).to.equal(0);
+    shoppingList.addItemsWithSpaces(
+      "1 book 12.49\n1 chocolate bar 0.85\n1 banana 0.79"
+    );
+
+    expect(shoppingList.calculateTaxes()).to.equal(0);
   });
 });
 

@@ -27,12 +27,11 @@ class ShoppingList {
       );
       this.shoppingListItems.push(item);
     }
-
+    // console.log(this.shoppingListItems);
     return this.shoppingListItems;
   }
 
   calculateTaxes() {
-    console.log("HEREEEEEE".this.shoppingListItems);
     // exempt: books, food, and medical products
     let exemptItems = ["book", "chocolate bar", "banana"];
     // 10% on all goods
@@ -44,7 +43,6 @@ class ShoppingList {
     // calculate sub-total: for each item on the shopping list, multiply quantity by price
     // calculate tax on total cost of each item
     // obs: round tax w/ 2 decimals: toFixed(1), then parseFloat(string).toFixed(2)
-    console.log("HEREEEEEE".this.shoppingListItems);
     for (let i = 0; i < this.shoppingListItems.length; i++) {
       let item = this.shoppingListItems[i];
       let itemQuantity = item.quantity;
