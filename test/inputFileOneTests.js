@@ -107,27 +107,27 @@ describe("Testing #calculateSubTotal functionality", () => {
   });
 
   it("#calculateSubTotal should return the subtotal #1", () => {
-    expect(
-      shoppingList.calculateSubTotal(
-        "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 1.85"
-      )
-    ).to.deep.equal(29.33);
+    shoppingList.addItemsWithSpaces(
+      "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 1.85"
+    );
+
+    expect(shoppingList.calculateSubTotal()).to.deep.equal(29.33);
   });
 
   it("#calculateSubTotal should be a function #2", () => {
-    expect(
-      shoppingList.calculateSubTotal(
-        "1 bottle 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
-      )
-    ).to.deep.equal(28.33);
+    shoppingList.addItemsWithSpaces(
+      "1 bottle 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
+    );
+
+    expect(shoppingList.calculateSubTotal()).to.deep.equal(28.33);
   });
 
   it("#calculateSubTotal should be a function #3", () => {
-    expect(
-      shoppingList.calculateSubTotal(
-        "1 book 12.49\n1 chocolate bar 0.85\n1 banana 0.79"
-      )
-    ).to.deep.equal(14.13);
+    shoppingList.addItemsWithSpaces(
+      "1 book 12.49\n1 chocolate bar 0.85\n1 banana 0.79"
+    );
+
+    expect(shoppingList.calculateSubTotal()).to.deep.equal(14.13);
   });
 });
 
