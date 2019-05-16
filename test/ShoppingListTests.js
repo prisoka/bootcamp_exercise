@@ -1,7 +1,7 @@
 // "use strict";
 
 const expect = require("chai").expect;
-const ShoppingList = require("../src/inputFileOne");
+const ShoppingList = require("../src/ShoppingList");
 
 describe("Shopping list with spaces case", () => {
   let shoppingList;
