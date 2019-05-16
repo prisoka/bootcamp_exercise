@@ -216,4 +216,14 @@ describe("Testing #printReceipt functionality", () => {
       "1 book: 15.10\n2 chocolate bar: 7.00\n1 banana: 1.00\n\nSales Taxes: 0.00\nTotal: 23.10"
     );
   });
+
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #3", () => {
+    shoppingList.addItemsWithPipes(
+      "Imported | 1 bottle of perfume | 47.50\nImported | 1 box of chocolates | 10.00"
+    );
+
+    expect(shoppingList.printReceipt()).to.deep.equal(
+      "1 imported bottle of perfume: 47.50\n1 imported box of chocolates: 10.00\n\nSales Taxes: 7.65\nTotal: 65.15"
+    );
+  });
 });

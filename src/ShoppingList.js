@@ -58,7 +58,7 @@ class ShoppingList {
 
   calculateTaxes() {
     // exempt: books, food, and medical products
-    let exemptItems = ["book", "chocolate bar", "banana"];
+    let exemptItems = ["book", "chocolate bar", "banana", "box of chocolates"];
     // 10% on all goods
     // 15% on imported goods
 
@@ -74,12 +74,16 @@ class ShoppingList {
       let itemPrice = parseFloat(item.price);
       let itemTotalCostBeforeTax = itemQuantity * itemPrice;
 
-      if (
-        !exemptItems.includes(item.itemName) &&
-        item.itemName !== "imported"
-      ) {
-        let tax = parseFloat(itemTotalCostBeforeTax * 0.1).toFixed(2);
-        taxArray.push(parseFloat(tax));
+      if (!exemptItems.includes(item.itemName)) {
+        let taxOnGoods = parseFloat(itemTotalCostBeforeTax * 0.1).toFixed(2);
+        taxArray.push(parseFloat(taxOnGoods));
+      }
+
+      if (item.imported) {
+        let taxOnImported = parseFloat(itemTotalCostBeforeTax * 0.05);
+        let taxOnImportedRounded =
+          (Math.ceil((taxOnImported * 100) / 5) * 5) / 100;
+        taxArray.push(parseFloat(taxOnImportedRounded));
       }
     }
 
@@ -90,7 +94,6 @@ class ShoppingList {
         })
         .toFixed(2);
     }
-
     return parseFloat(totalTax);
   }
 
@@ -126,8 +129,13 @@ class ShoppingList {
     for (let i = 0; i < this.shoppingListItems.length; i++) {
       let quantity = this.shoppingListItems[i].quantity;
       let itemName = this.shoppingListItems[i].itemName;
+      let imported = this.shoppingListItems[i].imported;
       let price = this.shoppingListItems[i].price;
       let totalPrice = (quantity * price).toFixed(2);
+
+      if (imported) {
+        itemName = "imported " + itemName;
+      }
       singleProduct = quantity + " " + itemName + ": " + totalPrice;
       products.push(singleProduct);
     }
@@ -164,3 +172,4 @@ module.exports = ShoppingList;
 
 //Edge case:
 // items without quantity, name or price?
+// alphabetical ordering
