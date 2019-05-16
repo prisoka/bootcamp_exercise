@@ -3,7 +3,7 @@
 const expect = require("chai").expect;
 const ShoppingList = require("../src/ShoppingList");
 
-describe("Shopping list with spaces case", () => {
+describe("Shopping list with SPACES case", () => {
   let shoppingList;
 
   beforeEach(() => {
@@ -47,6 +47,50 @@ describe("Shopping list with spaces case", () => {
       { quantity: 1, itemName: "book", price: "12.49" },
       { quantity: 1, itemName: "music CD", price: "14.99" },
       { quantity: 1, itemName: "chocolate bar", price: "0.85" }
+    ]);
+  });
+});
+
+describe("Shopping list with PIPES case", () => {
+  let shoppingList;
+
+  beforeEach(() => {
+    shoppingList = new ShoppingList();
+  });
+
+  afterEach(() => {
+    shoppingList = undefined;
+  });
+
+  it("ShoppingList should be an object", () => {
+    expect(shoppingList).to.be.a("object");
+  });
+
+  it("#addItemsWithPipes should be a function", () => {
+    expect(shoppingList.addItemsWithPipes).to.be.a("function");
+  });
+
+  it("#addItemsWithPipes should return an array of object", () => {
+    expect(
+      shoppingList.addItemsWithPipes(
+        `
+        Imported | 1 bottle of perfume | 47.50
+        Imported | 1 box of chocolates | 10.00
+        `
+      )
+    ).to.deep.equal([
+      {
+        quantity: 1,
+        itemName: "bottle of perfume",
+        price: "47.50",
+        imported: true
+      },
+      {
+        quantity: 1,
+        itemName: "box of chocolates",
+        price: "10.00",
+        imported: true
+      }
     ]);
   });
 });
