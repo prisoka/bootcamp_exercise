@@ -27,12 +27,12 @@ class ShoppingList {
       );
       this.shoppingListItems.push(item);
     }
-    // console.log(this.shoppingListItems);
+
     return this.shoppingListItems;
   }
 
-  calculateTaxes(string) {
-    let shoppingListItems = this.addItemsWithSpaces(string);
+  calculateTaxes() {
+    console.log("HEREEEEEE".this.shoppingListItems);
     // exempt: books, food, and medical products
     let exemptItems = ["book", "chocolate bar", "banana"];
     // 10% on all goods
@@ -44,8 +44,9 @@ class ShoppingList {
     // calculate sub-total: for each item on the shopping list, multiply quantity by price
     // calculate tax on total cost of each item
     // obs: round tax w/ 2 decimals: toFixed(1), then parseFloat(string).toFixed(2)
-    for (let i = 0; i < shoppingListItems.length; i++) {
-      let item = shoppingListItems[i];
+    console.log("HEREEEEEE".this.shoppingListItems);
+    for (let i = 0; i < this.shoppingListItems.length; i++) {
+      let item = this.shoppingListItems[i];
       let itemQuantity = item.quantity;
       let itemPrice = parseFloat(item.price);
       let itemTotalCostBeforeTax = itemQuantity * itemPrice;
@@ -74,13 +75,12 @@ class ShoppingList {
     return parseFloat(totalTax);
   }
 
-  calculateSubTotal(string) {
-    let shoppingListItems = this.addItemsWithSpaces(string);
+  calculateSubTotal() {
     let subTotalArray = [];
     let subTotal = 0;
 
-    for (let i = 0; i < shoppingListItems.length; i++) {
-      let item = shoppingListItems[i];
+    for (let i = 0; i < this.shoppingListItems.length; i++) {
+      let item = this.shoppingListItems[i];
       let itemQuantity = item.quantity;
       let itemPrice = parseFloat(item.price);
       let itemTotalCostBeforeTax = itemQuantity * itemPrice;
@@ -97,7 +97,26 @@ class ShoppingList {
     return parseFloat(subTotal);
   }
 
-  printReceipt(string) {}
+  printReceipt() {
+    let products = [];
+    let singleProduct = "";
+
+    let salesTax = this.calculateTaxes();
+    console.log(salesTax);
+
+    let subTotal = this.calculateSubTotal();
+    console.log(subTotal);
+
+    let total = 0.0;
+
+    for (let i = 0; i < this.shoppingListItems.length; i++) {
+      let quantity = this.shoppingListItems[i].quantity;
+      let itemName = this.shoppingListItems[i].itemName;
+      let price = this.shoppingListItems[i].price;
+      singleProduct = quantity + " " + itemName + ": " + price;
+      products.push(singleProduct);
+    }
+  }
 }
 
 module.exports = ShoppingList;
