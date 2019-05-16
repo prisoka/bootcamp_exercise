@@ -25,7 +25,7 @@ describe("Shopping list with SPACES case", () => {
 
   it("#addItemsWithSpaces should return an array of object", () => {
     expect(shoppingList.addItemsWithSpaces("1 apple 1.50")).to.deep.equal([
-      { quantity: 1, itemName: "apple", price: "1.50" }
+      { quantity: 1, itemName: "apple", price: "1.50", imported: false }
     ]);
   });
 
@@ -33,8 +33,8 @@ describe("Shopping list with SPACES case", () => {
     expect(
       shoppingList.addItemsWithSpaces("1 apple 1.50\n1 book 9.70")
     ).to.deep.equal([
-      { quantity: 1, itemName: "apple", price: "1.50" },
-      { quantity: 1, itemName: "book", price: "9.70" }
+      { quantity: 1, itemName: "apple", price: "1.50", imported: false },
+      { quantity: 1, itemName: "book", price: "9.70", imported: false }
     ]);
   });
 
@@ -44,9 +44,9 @@ describe("Shopping list with SPACES case", () => {
         "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
       )
     ).to.deep.equal([
-      { quantity: 1, itemName: "book", price: "12.49" },
-      { quantity: 1, itemName: "music CD", price: "14.99" },
-      { quantity: 1, itemName: "chocolate bar", price: "0.85" }
+      { quantity: 1, itemName: "book", price: "12.49", imported: false },
+      { quantity: 1, itemName: "music CD", price: "14.99", imported: false },
+      { quantity: 1, itemName: "chocolate bar", price: "0.85", imported: false }
     ]);
   });
 });
@@ -73,10 +73,7 @@ describe("Shopping list with PIPES case", () => {
   it("#addItemsWithPipes should return an array of object", () => {
     expect(
       shoppingList.addItemsWithPipes(
-        `
-        Imported | 1 bottle of perfume | 47.50
-        Imported | 1 box of chocolates | 10.00
-        `
+        "Imported | 1 bottle of perfume | 47.50\nImported | 1 box of chocolates | 10.00"
       )
     ).to.deep.equal([
       {

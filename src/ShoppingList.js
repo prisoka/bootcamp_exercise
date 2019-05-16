@@ -1,8 +1,9 @@
 class ShoppingListItem {
-  constructor(quantity, itemName, price) {
+  constructor(quantity, itemName, price, imported) {
     this.quantity = quantity;
     this.itemName = itemName;
     this.price = price;
+    this.imported = imported;
   }
 }
 
@@ -23,8 +24,32 @@ class ShoppingList {
       let item = new ShoppingListItem(
         parseInt(words[0]),
         words.splice(1, words.length - 2).join(" "),
-        parseFloat(words[words.length - 1]).toFixed(2)
+        parseFloat(words[words.length - 1]).toFixed(2),
+        false
       );
+      this.shoppingListItems.push(item);
+    }
+    // console.log(this.shoppingListItems);
+    return this.shoppingListItems;
+  }
+
+  addItemsWithPipes(string) {
+    // split on "\n"
+    let lines = string.split("\n");
+
+    // for each line, separate items based on spaces and create a new item for each
+    // push new reconstructed item to the array
+    for (let i = 0; i < lines.length; i++) {
+      let singleLine = lines[i];
+      let sections = singleLine.split(" | ");
+
+      let quantityAndName = sections[1].split(" ");
+      let quantity = parseInt(quantityAndName[0]);
+      let itemName = quantityAndName.splice(1).join(" ");
+      let price = parseFloat(sections[sections.length - 1]).toFixed(2);
+      let imported = sections[0] === "Imported" ? true : false;
+
+      let item = new ShoppingListItem(quantity, itemName, price, imported);
       this.shoppingListItems.push(item);
     }
     // console.log(this.shoppingListItems);
