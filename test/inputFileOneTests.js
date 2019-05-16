@@ -55,7 +55,7 @@ describe("Shopping list with spaces case", () => {
     expect(shoppingList.calculateTaxes).to.be.a("function");
   });
 
-  it("#calculateTaxes should output the total sales tax, with 2 exempt item", () => {
+  it("#calculateTaxes should output the total sales tax, with 2 exempt items", () => {
     expect(
       shoppingList.calculateTaxes(
         "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
@@ -111,5 +111,35 @@ describe("Shopping list with spaces case", () => {
   // #printReceipt
   it("#printReceipt should be a function", () => {
     expect(shoppingList.printReceipt).to.be.a("function");
+  });
+
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #1", () => {
+    expect(
+      shoppingList.printReceipt(
+        "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
+      )
+    ).to.deep.equal(
+      "1 book: 12.49\n1 music CD: 14.99\n1 chocolate bar: 0.85\n\nSales Taxes: 1.50\nTotal: 29.83"
+    );
+  });
+
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #2", () => {
+    expect(
+      shoppingList.printReceipt(
+        "1 bottle 12.49\n1 music CD 16.49\n1 chocolate bar 1.85"
+      )
+    ).to.deep.equal(
+      "1 bottle: 12.49\n1 music CD: 16.49\n1 chocolate bar: 1.85\n\nSales Taxes: 2.09\nTotal: 33.73"
+    );
+  });
+
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #3", () => {
+    expect(
+      shoppingList.printReceipt(
+        "1 book 15.00\n2 chocolate bar 3.50\n1 banana 1.00"
+      )
+    ).to.deep.equal(
+      "1 book: 15.00\n2 chocolate bar: 7.00\n1 banana: 1.00\n\nSales Taxes: 0\nTotal: 23.00"
+    );
   });
 });

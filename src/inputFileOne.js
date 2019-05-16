@@ -71,7 +71,6 @@ class ShoppingList {
     // calculate total
     // let total = (parseFloat(subTotal) + parseFloat(totalTax)).toFixed(2);
     // console.log("3. T O T A L", total);
-
     return parseFloat(totalTax);
   }
 
@@ -98,7 +97,7 @@ class ShoppingList {
     return parseFloat(subTotal);
   }
 
-  printReceipt() {}
+  printReceipt(string) {}
 }
 
 module.exports = ShoppingList;
