@@ -92,6 +92,55 @@ describe("Shopping list with PIPES case", () => {
   });
 });
 
+describe("Shopping list with COMAS case", () => {
+  let shoppingList;
+
+  beforeEach(() => {
+    shoppingList = new ShoppingList();
+  });
+
+  afterEach(() => {
+    shoppingList = undefined;
+  });
+
+  it("#addItemsWithComas should be a function", () => {
+    expect(shoppingList.addItemsWithComas).to.be.a("function");
+  });
+
+  it("#addItemsWithComas should return an array of object", () => {
+    expect(
+      shoppingList.addItemsWithComas(
+        "1 bottle of perfume, 27.99, imported\n1 bottle of perfume, 18.99\n1 packet of headache pills, 9.75\n1 box of chocolates, 11.25, imported"
+      )
+    ).to.deep.equal([
+      {
+        quantity: 1,
+        itemName: "bottle of perfume",
+        price: "27.99",
+        imported: true
+      },
+      {
+        quantity: 1,
+        itemName: "bottle of perfume",
+        price: "18.99",
+        imported: false
+      },
+      {
+        quantity: 1,
+        itemName: "packet of headache pills",
+        price: "9.75",
+        imported: false
+      },
+      {
+        quantity: 1,
+        itemName: "box of chocolates",
+        price: "11.25",
+        imported: true
+      }
+    ]);
+  });
+});
+
 describe("Testing #calculateTaxes functionality", () => {
   let shoppingList;
 
