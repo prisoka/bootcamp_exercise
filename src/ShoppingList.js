@@ -70,19 +70,18 @@ class ShoppingList {
       let quantity = parseInt(quantityAndName[0]);
       let itemName = quantityAndName.splice(1).join(" ");
 
-      let price
-      let imported
+      let price;
+      let imported;
 
-      if (sections.length > 2){
-         price = parseFloat(sections[1]).toFixed(2);
-         imported = (sections[2].slice(1) === "imported") ? true : false;
+      if (sections.length > 2) {
+        price = parseFloat(sections[1]).toFixed(2);
+        imported = sections[2].slice(1) === "imported" ? true : false;
       } else {
-         price = parseFloat(sections[sections.length - 1]).toFixed(2);
+        price = parseFloat(sections[sections.length - 1]).toFixed(2);
         imported = false;
       }
 
       let item = new ShoppingListItem(quantity, itemName, price, imported);
-      console.log(item);
       this.shoppingListItems.push(item);
     }
     // console.log(this.shoppingListItems);
@@ -91,7 +90,7 @@ class ShoppingList {
 
   calculateTaxes() {
     // exempt: books, food, and medical products
-    let exemptItems = ["book", "chocolate bar", "banana", "box of chocolates"];
+    let exemptItems = ["book", "chocolate bar", "banana", "box of chocolates", "packet of headache pills"];
     // 10% on all goods
     // 15% on imported goods
 
@@ -119,7 +118,7 @@ class ShoppingList {
         taxArray.push(parseFloat(taxOnImportedRounded));
       }
     }
-
+    console.log("prsicilla", taxArray);
     if (taxArray.length) {
       totalTax = taxArray
         .reduce((a, b) => {

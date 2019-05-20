@@ -277,12 +277,12 @@ describe("Testing #printReceipt functionality", () => {
   });
 
   it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, COMA case: #1", () => {
-    shoppingList.addItemsWithPipes(
+    shoppingList.addItemsWithComas(
       "1 bottle of perfume, 27.99, imported\n1 bottle of perfume, 18.99\n1 packet of headache pills, 9.75\n1 box of chocolates, 11.25, imported"
     );
 
     expect(shoppingList.printReceipt()).to.deep.equal(
-      "1 packet of headache pills: 9.75\n1 bottle of perfume: 20.89\n1 imported box of chocolates: 11.85\n1 imported bottle of perfume: 32.19\n\nSales Taxes: 6.70\nTotal: 74.68"
+      "1 imported bottle of perfume: 27.99\n1 bottle of perfume: 18.99\n1 packet of headache pills: 9.75\n1 imported box of chocolates: 11.25\n\nSales Taxes: 6.70\nTotal: 74.68"
     );
   });
 });
