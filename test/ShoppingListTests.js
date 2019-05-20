@@ -278,7 +278,7 @@ describe("Testing #printReceipt functionality", () => {
 
   it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, COMA case: #1", () => {
     shoppingList.addItemsWithPipes(
-      "Imported | 1 bottle of perfume | 47.50\nImported | 1 box of chocolates | 10.00"
+      "1 bottle of perfume, 27.99, imported\n1 bottle of perfume, 18.99\n1 packet of headache pills, 9.75\n1 box of chocolates, 11.25, imported"
     );
 
     expect(shoppingList.printReceipt()).to.deep.equal(
