@@ -236,7 +236,7 @@ describe("Testing #printReceipt functionality", () => {
     expect(shoppingList.printReceipt).to.be.a("function");
   });
 
-  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #1", () => {
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, SPACE case: #1", () => {
     shoppingList.addItemsWithSpaces(
       "1 book 12.49\n1 music CD 14.99\n1 chocolate bar 0.85"
     );
@@ -246,7 +246,7 @@ describe("Testing #printReceipt functionality", () => {
     );
   });
 
-  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #2", () => {
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, SPACE case: #2", () => {
     shoppingList.addItemsWithSpaces(
       "1 bottle 12.49\n1 music CD 16.49\n1 chocolate bar 1.85"
     );
@@ -256,7 +256,7 @@ describe("Testing #printReceipt functionality", () => {
     );
   });
 
-  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #3", () => {
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, SPACE case: #3", () => {
     shoppingList.addItemsWithSpaces(
       "1 book 15.10\n2 chocolate bar 3.50\n1 banana 1.00"
     );
@@ -266,13 +266,23 @@ describe("Testing #printReceipt functionality", () => {
     );
   });
 
-  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, #3", () => {
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, PIPE case: #1", () => {
     shoppingList.addItemsWithPipes(
       "Imported | 1 bottle of perfume | 47.50\nImported | 1 box of chocolates | 10.00"
     );
 
     expect(shoppingList.printReceipt()).to.deep.equal(
       "1 imported bottle of perfume: 47.50\n1 imported box of chocolates: 10.00\n\nSales Taxes: 7.65\nTotal: 65.15"
+    );
+  });
+
+  it("#printReceipt should return a report with items, quantity, cost, sales taxes and total, COMA case: #1", () => {
+    shoppingList.addItemsWithPipes(
+      "Imported | 1 bottle of perfume | 47.50\nImported | 1 box of chocolates | 10.00"
+    );
+
+    expect(shoppingList.printReceipt()).to.deep.equal(
+      "1 packet of headache pills: 9.75\n1 bottle of perfume: 20.89\n1 imported box of chocolates: 11.85\n1 imported bottle of perfume: 32.19\n\nSales Taxes: 6.70\nTotal: 74.68"
     );
   });
 });
