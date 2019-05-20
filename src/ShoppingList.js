@@ -56,6 +56,39 @@ class ShoppingList {
     return this.shoppingListItems;
   }
 
+  addItemsWithComas(string) {
+    // split on "\n"
+    let lines = string.split("\n");
+
+    // for each line, separate items based on spaces and create a new item for each
+    // push new reconstructed item to the array
+    for (let i = 0; i < lines.length; i++) {
+      let singleLine = lines[i];
+
+      let sections = singleLine.split(",");
+      let quantityAndName = sections[0].split(" ");
+      let quantity = parseInt(quantityAndName[0]);
+      let itemName = quantityAndName.splice(1).join(" ");
+
+      let price
+      let imported
+
+      if (sections.length > 2){
+         price = parseFloat(sections[1]).toFixed(2);
+         imported = (sections[2].slice(1) === "imported") ? true : false;
+      } else {
+         price = parseFloat(sections[sections.length - 1]).toFixed(2);
+        imported = false;
+      }
+
+      let item = new ShoppingListItem(quantity, itemName, price, imported);
+      console.log(item);
+      this.shoppingListItems.push(item);
+    }
+    // console.log(this.shoppingListItems);
+    return this.shoppingListItems;
+  }
+
   calculateTaxes() {
     // exempt: books, food, and medical products
     let exemptItems = ["book", "chocolate bar", "banana", "box of chocolates"];
