@@ -202,6 +202,7 @@ module.exports = ShoppingList;
 // Sales Taxes: 1.50
 // Total: 29.83
 
-//Edge case:
+//Edge cases:
 // items without quantity, name or price?
 // alphabetical ordering
+// item price on receipt has to be total (price + taxes if applicable)
